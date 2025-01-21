@@ -5,11 +5,11 @@ setup(
     version="1.0.0",
     packages=find_packages(),
     install_requires=[
-        "yt-dlp>=2024.3.10"
+        "yt-dlp>=2024.1.15"
     ],
     entry_points={
         'console_scripts': [
-            'ytdownload=ytdownload.ytdownload:main'  # Adjust if your main function has a different name
+            'ytdownload=ytdownload.ytdownload:download_video',
         ],
     },
 )
