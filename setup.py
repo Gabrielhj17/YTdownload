@@ -9,7 +9,8 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'ytdownload=ytdownload.ytdownload:download_video',
+            'ytdownload=ytdownload.ytdownload:main'
         ],
     },
+    python_requires='>=3.11'
 )
