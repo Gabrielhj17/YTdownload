@@ -2,11 +2,16 @@
 
 import yt_dlp
 import os
+import ssl
+import sys
 
 def download_video(url):
     try:
         # Get the user's Downloads folder
         downloads_folder = os.path.join(os.path.expanduser("~"), "Downloads")
+        
+        # Create SSL context that doesn't verify certificates
+        ssl._create_default_https_context = ssl._create_unverified_context
         
         # yt-dlp options
         ydl_opts = {
@@ -26,6 +31,20 @@ def download_video(url):
     except Exception as e:
         print(f"An error occurred: {e}")
 
+def main():
+    if len(sys.argv) > 1 and sys.argv[1] == '--help':
+        print("Usage: ytdownload [URL]")
+        print("If no URL is provided, you will be prompted to enter one.")
+        print("\nOptions:")
+        print("  --help    Show this help message")
+        sys.exit(0)
+    
+    if len(sys.argv) > 1:
+        url = sys.argv[1]
+    else:
+        url = input("Enter the YouTube video URL: ")
+    
+    download_video(url)
+
 if __name__ == "__main__":
-    video_url = input("Enter the YouTube video URL: ")
-    download_video(video_url)
+    main()
